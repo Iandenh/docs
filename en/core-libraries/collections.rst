@@ -53,27 +53,27 @@ List of Methods
 .. table::
     :class: docutils internal-toc
 
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`append`    | :php:meth:`buffered`      | :php:meth:`combine`  | :php:meth:`compile` |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`contains`  | :php:meth:`countBy`       | :php:meth:`chunk`    | :php:meth:`each`    |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`every`     | :php:meth:`extract`       | :php:meth:`filter`   | :php:meth:`first`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`groupBy`   | :php:meth:`indexBy`       | :php:meth:`insert`   | :php:meth:`isEmpty` |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`last`      | :php:meth:`listNested`    | :php:meth:`map`      | :php:meth:`match`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`max`       | :php:meth:`min`           | :php:meth:`nest`     | :php:meth:`reduce`  |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`reject`    | :php:meth:`sample`        | :php:meth:`shuffle`  | :php:meth:`skip`    |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`some`      | :php:meth:`sortBy`        | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`take`      | :php:meth:`through`       | :php:meth:`unfold`   | :php:meth:`zip`     |
-    +-----------------------+---------------------------+----------------------+---------------------+
-    | :php:meth:`transpose` | :php:meth:`chunkWithKeys` |                      |                     |
-    +-----------------------+---------------------------+----------------------+---------------------+
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`append`    | :php:meth:`avg`      | :php:meth:`buffered`  | :php:meth:`combine`      |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`compile`   | :php:meth:`contains` | :php:meth:`countBy`   | :php:meth:`chunk`        |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`each`      | :php:meth:`every`    | :php:meth:`extract`   | :php:meth:`filter`       |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`first`     | :php:meth:`groupBy`  | php:meth:`indexBy`    | :php:meth:`insert`       |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`isEmpty`   | :php:meth:`last`     | :php:meth:`listNested`| :php:meth:`map`          |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`match`     | :php:meth:`max`      | :php:meth:`median`    | :php:meth:`min`          |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`nest`      | :php:meth:`reduce`   | :php:meth:`reject`    | :php:meth:`sample`       |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`shuffle`   | :php:meth:`skip`     | :php:meth:`some`      | :php:meth:`sortBy`       |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`stopWhen`  | :php:meth:`sumOf`    | :php:meth:`take`      | :php:meth:`through`      |
+    +-----------------------+----------------------+-----------------------+--------------------------+
+    | :php:meth:`unfold`    | :php:meth:`zip`      | :php:meth:`transpose` |:php:meth:`chunkWithKeys` |
+    +-----------------------+----------------------+-----------------------+--------------------------+
 
 Iterating
 =========
@@ -820,6 +820,45 @@ of the each of the original columns::
 
 .. versionadded:: 3.3.0
     ``Collection::transpose()`` was added in 3.3.0.
+
+.. php:method:: avg()
+
+The ``avg()`` method will return the average of a property or of all elements::
+
+     $items = [1, 2, 3];
+     $collection = new Collection($items);
+     $average = $collection->avg(); // 2
+
+     $items = [
+         ['invoice' => ['total' => 100]],
+         ['invoice' => ['total' => 200]]
+     ];
+     $collection = new Collection($items);
+     $average = $collection->avg('invoice.total'); //150
+
+.. versionadded:: 3.5.0
+    ``Collection::avg()`` was added in 3.5.0.
+    
+.. php:method:: median()
+
+The ``median()`` method will return the median of a property or of all elements::
+
+     $items = [5, 2, 4];
+     $collection = new Collection($items);
+     $average = $collection->median(); // 4
+
+     $items = [
+         ['invoice' => ['total' => 400]],
+         ['invoice' => ['total' => 500]],
+         ['invoice' => ['total' => 200]],
+         ['invoice' => ['total' => 100]],
+         ['invoice' => ['total' => 333]]
+     ];
+     $collection = new Collection($items);
+     $average = $collection->median('invoice.total'); //333
+
+.. versionadded:: 3.5.0
+    ``Collection::median()`` was added in 3.5.0.
 
 Withdrawing Elements
 --------------------
